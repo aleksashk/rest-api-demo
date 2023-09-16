@@ -1,11 +1,10 @@
 package by.aleksandrphilimonov.restapidemo.controller;
 
 import by.aleksandrphilimonov.restapidemo.model.Book;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/books")
@@ -28,6 +27,12 @@ public class BookController {
     @GetMapping("/")
     public List<Book> getAllBook() {
         return books;
+    }
+
+    @GetMapping("/{id}")// api/books/1
+    public Book findById(@PathVariable Integer id){
+        Optional<Book> optional = books.stream().filter(book -> book.getId() == id).findFirst();
+        return optional.orElseGet(() -> books.stream().filter(book -> book.getId() == id).findFirst().get());
     }
 
 }
