@@ -40,12 +40,14 @@ public class InMemoryBookDAO implements BookDAO {
 
     @Override
     public long count() {
-        return 0;
+        return books.size();
     }
 
     @Override
     public Book create(Book book) {
-        return null;
+        book.setId((int) count() + 1);
+        books.add(book);
+        return book;
     }
 
     @Override

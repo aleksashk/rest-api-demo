@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/books")
@@ -26,12 +25,12 @@ public class BookController {
     @GetMapping("/{id}")// api/books/1
     public Book findById(@PathVariable Integer id) {
         return dao.findById(id)
-                .orElseThrow(()->new RuntimeException("Book with id: " + id + " was not found."));
+                .orElseThrow(() -> new RuntimeException("Book with id: " + id + " was not found."));
     }
 
     @PostMapping
-    public void create(@Valid Book book) {
-        //before we event get here
+    public void create(@RequestBody Book book) {
+        dao.create(book);
     }
 
     @PutMapping("/{id}")
