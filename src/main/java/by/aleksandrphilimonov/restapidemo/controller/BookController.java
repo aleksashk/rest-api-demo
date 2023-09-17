@@ -1,5 +1,7 @@
 package by.aleksandrphilimonov.restapidemo.controller;
 
+import by.aleksandrphilimonov.restapidemo.dao.BookDAO;
+import by.aleksandrphilimonov.restapidemo.dao.InMemoryBookDAO;
 import by.aleksandrphilimonov.restapidemo.model.Book;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -11,47 +13,40 @@ import java.util.Optional;
 @RequestMapping("/api/books")
 public class BookController {
 
-    private final List<Book> books;
+    private BookDAO dao;
 
     public BookController() {
-        this.books = List.of(
-                new Book(1,
-                "Hacking with Spring Boot 2.3; Eactive Edition",
-                "Greg l. Turnquist",
-                "Amazon"),
-                new Book(2,
-                        "Spring boot: Up and Runnitg",
-                        "Mark Heckler",
-                        "OReilly Media, Inc"));
+        this.dao = new InMemoryBookDAO();
     }
 
     @GetMapping("/")
     public List<Book> getAllBook() {
-        return books;
+        return dao.findAll();
     }
 
     @GetMapping("/{id}")// api/books/1
-    public Book findById(@PathVariable Integer id){
+    public Book findById(@PathVariable Integer id) {
         Optional<Book> optional = books.stream().filter(book -> book.getId() == id).findFirst();
         return optional.orElseGet(() -> books.stream().filter(book -> book.getId() == id).findFirst().get());
     }
 
     @PostMapping
-    public void create(@Valid Book book){
+    public void create(@Valid Book book) {
         //before we event get here
     }
+
     @PutMapping("/{id}")
-    public void update(@Valid Book book){
+    public void update(@Valid Book book) {
         //;update an existing book
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id) {
         //delete Book by id
     }
 
-    public void findBookByAuthor(){
-        
+    public void findBookByAuthor() {
+
     }
 
 }
