@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/books")
@@ -18,16 +17,16 @@ public class BookController {
         this.dao = dao;
     }
 
-    @GetMapping("/")
-    public List<Book> getAllBook() {
+    @GetMapping
+    public List<Book> findAll() {
         return dao.findAll();
     }
 
-    @GetMapping("/{id}")// api/books/1
-    public Book findById(@PathVariable Integer id) {
-        Optional<Book> optional = books.stream().filter(book -> book.getId() == id).findFirst();
-        return optional.orElseGet(() -> books.stream().filter(book -> book.getId() == id).findFirst().get());
-    }
+//    @GetMapping("/{id}")// api/books/1
+//    public Book findById(@PathVariable Integer id) {
+//        Optional<Book> optional = books.stream().filter(book -> book.getId() == id).findFirst();
+//        return optional.orElseGet(() -> books.stream().filter(book -> book.getId() == id).findFirst().get());
+//    }
 
     @PostMapping
     public void create(@Valid Book book) {

@@ -33,7 +33,7 @@ public class InMemoryBookDAO implements BookDAO {
 
     @Override
     public List<Book> findAll() {
-        return null;
+        return books;
     }
 
     @Override
