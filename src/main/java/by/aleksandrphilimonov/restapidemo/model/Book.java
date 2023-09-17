@@ -1,7 +1,10 @@
 package by.aleksandrphilimonov.restapidemo.model;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class Book {
     private int id;
+    @NotEmpty
     private String title;
     private String author;
     private String publisher;
