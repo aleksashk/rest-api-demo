@@ -1,11 +1,13 @@
 package by.aleksandrphilimonov.restapidemo.dao;
 
 import by.aleksandrphilimonov.restapidemo.model.Book;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class InMemoryBookDAO implements BookDAO {
     private List<Book> books = new ArrayList<>();
 

@@ -1,7 +1,6 @@
 package by.aleksandrphilimonov.restapidemo.controller;
 
 import by.aleksandrphilimonov.restapidemo.dao.BookDAO;
-import by.aleksandrphilimonov.restapidemo.dao.InMemoryBookDAO;
 import by.aleksandrphilimonov.restapidemo.model.Book;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,10 @@ import java.util.Optional;
 @RequestMapping("/api/books")
 public class BookController {
 
-    private BookDAO dao;
+    private final BookDAO dao;
 
-    public BookController() {
-        this.dao = new InMemoryBookDAO();
+    public BookController(BookDAO dao) {
+        this.dao = dao;
     }
 
     @GetMapping("/")
