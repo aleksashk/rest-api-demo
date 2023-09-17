@@ -34,8 +34,8 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid Book book) {
-        //;update an existing book
+    public void update(@RequestBody Book book) {
+        dao.update(book);
     }
 
     @DeleteMapping("/{id}")

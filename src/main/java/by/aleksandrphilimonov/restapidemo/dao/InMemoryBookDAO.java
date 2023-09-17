@@ -52,7 +52,15 @@ public class InMemoryBookDAO implements BookDAO {
 
     @Override
     public Book update(Book book) {
-        return null;
+        for (Book b : books) {
+            if(b.getId()==book.getId()){
+                b.setTitle(book.getTitle());
+                b.setAuthor(book.getAuthor());
+                b.setPublisher(book.getPublisher());
+            }
+            break;
+        }
+        return book;
     }
 
     @Override
