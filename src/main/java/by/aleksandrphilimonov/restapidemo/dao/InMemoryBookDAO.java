@@ -65,6 +65,6 @@ public class InMemoryBookDAO implements BookDAO {
 
     @Override
     public void delete(int id) {
-
+        books.remove(id);
     }
 }
