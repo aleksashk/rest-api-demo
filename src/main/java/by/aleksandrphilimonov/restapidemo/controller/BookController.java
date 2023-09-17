@@ -25,12 +25,8 @@ public class BookController {
 
     @GetMapping("/{id}")// api/books/1
     public Book findById(@PathVariable Integer id) {
-        Optional<Book> book = dao.findById(id);
-        if (book.isPresent()) {
-            return book.get();
-        } else {
-            throw new RuntimeException("Book with id: " + id + " was not found.");
-        }
+        return dao.findById(id)
+                .orElseThrow(()->new RuntimeException("Book with id: " + id + " was not found."));
     }
 
     @PostMapping
