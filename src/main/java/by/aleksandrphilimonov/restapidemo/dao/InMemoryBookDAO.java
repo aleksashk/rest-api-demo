@@ -28,7 +28,9 @@ public class InMemoryBookDAO implements BookDAO {
 
     @Override
     public Optional<Book> findById(int id) {
-        return Optional.empty();
+        return books.stream()
+                .filter(book -> book.getId() == id)
+                .findFirst();
     }
 
     @Override
